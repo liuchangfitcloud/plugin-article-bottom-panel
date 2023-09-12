@@ -1,45 +1,20 @@
-# plugin-starter
+# Halo 文章底部块插件
 
-Halo 2.0 插件开发快速开始模板。
+该插件提供了一个文章通用的底部显示块，有文字描述与按钮悬浮框显示
 
-## 开发环境
 
-插件开发的详细文档请查阅：<https://docs.halo.run/developer-guide/plugin/hello-world>
+## 使用方式
+### 下载并安装插件
+### 配置插件
+![1](images/config-1.png)
+![2](images/config-2.png)
+![3](images/config-3.png)
 
-```bash
-git clone git@github.com:halo-sigs/plugin-starter.git
+## 注意事项
 
-# 或者当你 fork 之后
+- 会自动在文章内容后进行渲染，不受主题限制，但是他是一个通用的过程，暂时不能针对单个文章进行设置
+----
 
-git clone git@github.com:{your_github_id}/plugin-starter.git
-```
-
-```bash
-cd path/to/plugin-starter
-```
-
-```bash
-# macOS / Linux
-./gradlew pnpmInstall
-
-# Windows
-./gradlew.bat pnpmInstall
-```
-
-```bash
-# macOS / Linux
-./gradlew build
-
-# Windows
-./gradlew.bat build
-```
-
-修改 Halo 配置文件：
-
-```yaml
-halo:
-  plugin:
-    runtime-mode: development
-    fixedPluginPath:
-      - "/path/to/plugin-starter"
-```
+## 功能截图
+![img.png](images/show-1.png)
+![img.png](images/show-2.png)
