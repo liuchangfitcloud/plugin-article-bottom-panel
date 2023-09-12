@@ -8,7 +8,7 @@ spec:
   author:
     name: Charlie Liu
     website: https://www.wggznb.xyz
-  logo: https://halo.run/logo
+  logo: logo.svg
   settingName: plugin-article-bottom-panel-settings
   configMapName: plugin-article-bottom-panel-configmap
   homepage: https://github.com/liuchangfitcloud/plugin-article-bottom-panel

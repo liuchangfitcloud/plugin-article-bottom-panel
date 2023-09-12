@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div class="flex justify-center items-center">
-                <box-icon :name='btnIcon' class="btn-icon" color='#ffffff'></box-icon>
+                <box-icon :name='btnIcon' class="btn-icon" :color="customCss.btnTextColor"></box-icon>
                 <span class="ml-1 text-xs">{{ btnName }}</span>
             </div>
         </button>
@@ -156,7 +156,7 @@ customCss.value = JSON.parse(props.cardStyle) as CardStyle
     position: absolute;
     width: 0.5rem;
     height: 0.5rem;
-    background: #fff;
+    background: var(--tips-bg-color);
     border-radius: 1px;
 }
 
