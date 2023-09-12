@@ -1,0 +1,155 @@
+apiVersion: v1alpha1
+kind: Setting
+metadata:
+  name: plugin-article-bottom-panel-settings
+spec:
+  forms:
+    - group: basic
+      label: 基本设置
+      formSchema:
+        - $formkit: radio
+          help: 修改内容后会在下次渲染的时候生效
+          name: show_block
+          id: show_block
+          key: show_block
+          options:
+            - label: 是
+              value: true
+            - label: 否
+              value: false
+          label: 是否显示块
+          value: true
+        - $formkit: text
+          if: "$get(show_block).value"
+          name: info
+          label: 信息
+          validation: "required"
+          value: 如果觉得我的文章对您有用，请随意赞赏。您的支持将鼓励我继续创作!
+          help: 显示文本信息
+        - $formkit: radio
+          help: 显示按钮
+          if: "$get(show_block).value"
+          name: show_btn
+          id: show_btn
+          key: show_btn
+          options:
+            - label: 是
+              value: true
+            - label: 否
+              value: false
+          label: 是否显示按钮
+          value: true
+        - $formkit: text
+          if: "$get(show_block).value && $get(show_btn).value"
+          label: 按钮图标
+          name: btn_icon
+          validation: "required"
+          value: "gift"
+          help: 使用的是https://boxicons.com/的图标集
+        - $formkit: text
+          if: "$get(show_block).value && $get(show_btn).value"
+          label: 按钮名称
+          name: btn_name
+          validation: "required"
+          value: "赞赏支持"
+          help: 按钮显示的名称
+        - $formkit: repeater
+          if: "$get(show_block).value && $get(show_btn).value"
+          name: items
+          id: items
+          key: items
+          label: 悬浮内容集合
+          help: 悬浮的内容集合    
+          children: 
+            - $formkit: text
+              name: name
+              label: 显示名称
+              help: 显示名称
+              value: ""
+            - $formkit: attachment
+              accepts:
+                - "image/*"
+              name: image
+              label: 显示图片
+              help: 显示图片
+            - $formkit: text
+              name: desc
+              label: 描述
+              help: 显示描述
+              value: ""
+        - $formkit: color
+          if: "$get(show_block).value"
+          name: bg_color
+          label: 块背景颜色
+          validation: "required"
+          value: "#eeeeee"
+          help: 显示的背景颜色
+        - $formkit: color
+          if: "$get(show_block).value"
+          name: title_text_color
+          label: 文字颜色
+          validation: "required"
+          value: "#000000"
+          help: 显示的文字颜色
+        - $formkit: radio
+          help: 突出边框显示位置
+          name: card_border_align
+          id: card_border_align
+          key: card_border_align
+          options:
+            - label: 左
+              value: left
+            - label: 右
+              value: right
+          label: 突出边框显示位置只能选择左/右
+          value: left
+        - $formkit: color
+          if: "$get(show_block).value && $get(show_btn).value"
+          name: btn_bg_color
+          label: 按钮背景/突出边框颜色
+          validation: "required"
+          value: "#e99e60"
+          help: 按钮的背景颜色与左右突出边框的颜色
+        - $formkit: color
+          if: "$get(show_block).value && $get(show_btn).value"
+          name: btn_text_color
+          label: 按钮文字颜色
+          validation: "required"
+          value: "#ffffff"
+          help: 按钮文字颜色
+        - $formkit: radio
+          if: "$get(show_block).value && $get(show_btn).value"
+          help: 悬浮框的位置
+          name: tips_direction
+          id: tips_direction
+          key: tips_direction
+          options:
+            - label: 左
+              value: left
+            - label: 中
+              value: mid  
+            - label: 右
+              value: right
+          label: 悬浮框的位置
+          value: mid
+        - $formkit: color
+          if: "$get(show_block).value && $get(show_btn).value"
+          name: tips_bg_color
+          label: 悬浮框的背景颜色
+          validation: "required"
+          value: "#ffffff"
+          help: 悬浮框的背景颜色
+        - $formkit: color
+          if: "$get(show_block).value && $get(show_btn).value"
+          name: tips_text_color
+          label: 悬浮框的文字颜色
+          validation: "required"
+          value: "#111111"
+          help: 悬浮框的文字颜色      
+        - $formkit: color
+          if: "$get(show_block).value && $get(show_btn).value"
+          name: border_color
+          label: 悬浮框的边框颜色
+          validation: "required"
+          value: "#cccccc"
+          help: 悬浮框的边框颜色            

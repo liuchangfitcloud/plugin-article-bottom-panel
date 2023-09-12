@@ -73,3 +73,8 @@ application-local.properties
 /admin-frontend/node_modules/
 /workplace/
 /src/main/resources/console/
+article-panel/.vscode
+article-panel/index.html
+article-panel/node_modules
+article-panel/dist
+

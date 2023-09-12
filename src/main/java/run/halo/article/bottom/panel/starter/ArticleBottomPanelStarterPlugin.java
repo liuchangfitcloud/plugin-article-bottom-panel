@@ -1,4 +1,4 @@
-package run.halo.starter;
+package run.halo.article.bottom.panel.starter;
 
 import org.pf4j.PluginWrapper;
 import org.springframework.stereotype.Component;
@@ -13,9 +13,9 @@ import run.halo.app.plugin.BasePlugin;
  * @since 1.0.0
  */
 @Component
-public class StarterPlugin extends BasePlugin {
+public class ArticleBottomPanelStarterPlugin extends BasePlugin {
 
-    public StarterPlugin(PluginWrapper wrapper) {
+    public ArticleBottomPanelStarterPlugin(PluginWrapper wrapper) {
         super(wrapper);
     }
 
