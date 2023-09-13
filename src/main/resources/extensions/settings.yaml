@@ -43,15 +43,19 @@ spec:
           if: "$get(show_block).value && $get(show_btn).value"
           label: 按钮图标
           name: btn_icon
+          id: btn_icon
+          key: btn_icon
           validation: "required"
-          value: "gift"
+          value: gift
           help: 使用的是https://boxicons.com/的图标集
         - $formkit: text
           if: "$get(show_block).value && $get(show_btn).value"
           label: 按钮名称
           name: btn_name
+          id: btn_name
+          key: btn_name
           validation: "required"
-          value: "赞赏支持"
+          value: 赞赏支持
           help: 按钮显示的名称
         - $formkit: repeater
           if: "$get(show_block).value && $get(show_btn).value"
@@ -82,14 +86,14 @@ spec:
           name: bg_color
           label: 块背景颜色
           validation: "required"
-          value: "#eeeeee"
+          value: #eeeeee
           help: 显示的背景颜色
         - $formkit: color
           if: "$get(show_block).value"
           name: title_text_color
           label: 文字颜色
           validation: "required"
-          value: "#000000"
+          value: #000000
           help: 显示的文字颜色
         - $formkit: radio
           help: 突出边框显示位置
@@ -108,14 +112,14 @@ spec:
           name: btn_bg_color
           label: 按钮背景/突出边框颜色
           validation: "required"
-          value: "#e99e60"
+          value: #e99e60
           help: 按钮的背景颜色与左右突出边框的颜色
         - $formkit: color
           if: "$get(show_block).value && $get(show_btn).value"
           name: btn_text_color
           label: 按钮文字颜色
           validation: "required"
-          value: "#ffffff"
+          value: #ffffff
           help: 按钮文字颜色
         - $formkit: radio
           if: "$get(show_block).value && $get(show_btn).value"
@@ -137,19 +141,19 @@ spec:
           name: tips_bg_color
           label: 悬浮框的背景颜色
           validation: "required"
-          value: "#ffffff"
+          value: #ffffff
           help: 悬浮框的背景颜色
         - $formkit: color
           if: "$get(show_block).value && $get(show_btn).value"
           name: tips_text_color
           label: 悬浮框的文字颜色
           validation: "required"
-          value: "#111111"
+          value: #111111
           help: 悬浮框的文字颜色      
         - $formkit: color
           if: "$get(show_block).value && $get(show_btn).value"
           name: border_color
           label: 悬浮框的边框颜色
           validation: "required"
-          value: "#cccccc"
+          value: #cccccc
           help: 悬浮框的边框颜色            
