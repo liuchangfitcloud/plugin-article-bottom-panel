@@ -1,13 +1,13 @@
 <template>
-    <div class="justify-center items-center tip-card rounded" :class="customCss.cardBorderAlign">
-        <p class="font-bold text-lg px-6 py-4 title">{{ info }}</p>
+    <div v-if="setting.showBlock" class="justify-center items-center tip-card rounded" :class="setting.cardBorderAlign">
+        <p class="font-bold text-lg px-6 py-4 title">{{ setting.info }}</p>
 
-        <button v-if="showBtn" class="btn mx-6 mb-4 p-2 rounded relative">
-            <div v-if="tipItems.length > 0"
-                :class="tipItems.length > 0 ? 'cursor-pointer ' + customCss.tipsDirection : 'cursor-default'"
+        <button v-if="setting.showBtn" class="btn mx-6 mb-4 p-2 rounded relative">
+            <div v-if="setting.items.length > 0"
+                :class="setting.items.length > 0 ? 'cursor-pointer ' + setting.tipsDirection : 'cursor-default'"
                 class="tips rounded">
                 <div class="flex flex-row justify-between p-4 tips-content">
-                    <div v-for="im in tipItems" :key="im.name"
+                    <div v-for="im in setting.items" :key="im.name"
                         class="flex flex-col justify-center items-center text-center px-2">
                         <span class="text-sm">{{ im.name }}</span>
                         <img class="icon" :src="im.image" />
@@ -16,8 +16,8 @@
                 </div>
             </div>
             <div class="flex justify-center items-center">
-                <box-icon :name='btnIcon' class="btn-icon" :color="customCss.btnTextColor"></box-icon>
-                <span class="ml-1 text-xs">{{ btnName }}</span>
+                <box-icon :name='setting.btnIcon' class="btn-icon" :color="setting.btnTextColor"></box-icon>
+                <span class="ml-1 text-xs">{{ setting.btnName }}</span>
             </div>
         </button>
     </div>
@@ -25,22 +25,7 @@
 <script setup lang="ts">
 import 'boxicons'
 import { ref } from 'vue'
-
-const props = withDefaults(defineProps<{
-    info: string,
-    btnName: string,
-    showBtn: boolean,
-    btnIcon: string,
-    items: string,
-    cardStyle: string
-}>(), {
-    info: '如果觉得我的文章对您有用，请随意赞赏。您的支持将鼓励我继续创作!',
-    btnName: '赞赏支持',
-    btnIcon: 'gift',
-    showBtn: false,
-    items: '[]',
-    cardStyle: '{"borderColor": "#ccc","bgColor": "#eee","titleTextColor": "#000","btnTextColor": "#fff","btnBgColor": "#e99e60","tipsTextColor": "#111","tipsBgColor": "#fff","cardBorderAlign": "left","tipsDirection": "mid"}'
-});
+import axios from 'axios'
 
 
 type TipItem = {
@@ -49,22 +34,29 @@ type TipItem = {
     desc: string
 }
 
-const tipItems = ref<TipItem[]>([])
-tipItems.value = JSON.parse(props.items) as TipItem[]
-
-type CardStyle = {
-    borderColor: string,
+type ConfigSetting = {
+    showBlock: boolean,
+    info: string,
+    showBtn: boolean,
+    btnIcon: string,
+    btnName: string,
     bgColor: string,
     titleTextColor: string,
-    btnTextColor: string,
-    btnBgColor: string,
-    tipsTextColor: string,
-    tipsBgColor: string,
     cardBorderAlign: string,
+    btnBgColor: string,
+    btnTextColor: string,
     tipsDirection: string,
+    tipsBgColor: string,
+    tipsTextColor: string,
+    borderColor: string,
+    items: TipItem[]
 }
-const customCss = ref<CardStyle>({
-    borderColor: "#ccc",
+const setting = ref<ConfigSetting>({
+    showBlock: false,
+    info: "如果觉得我的文章对您有用，请随意赞赏。您的支持将鼓励我继续创作!",
+    showBtn: false,
+    btnIcon: "gift",
+    btnName: "支持赞赏",
     bgColor: "#eee",
     titleTextColor: "#000",
     btnTextColor: "#fff",
@@ -72,23 +64,31 @@ const customCss = ref<CardStyle>({
     tipsTextColor: "#111",
     tipsBgColor: "#fff",
     cardBorderAlign: "left",
-    tipsDirection: 'mid'
+    tipsDirection: 'mid',
+    borderColor: "#ccc",
+    items: []
 })
-customCss.value = JSON.parse(props.cardStyle) as CardStyle
+
+const init = async () => {
+    const { data } = await axios.get("/apis/post.sponsor.halo.run/v1alpha1/anonymous/info", {
+        withCredentials: true
+    })
+    setting.value = data
+}
+
+init()
 </script>
-<style tailwind lang="less">
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+<style lang="css" scoped>
+/* @import url(../style/tailwind.css); */
 
 .tip-card {
-    --border-color: v-bind(customCss.borderColor);
-    --bg-color: v-bind(customCss.bgColor);
-    --title-text-color: v-bind(customCss.titleTextColor);
-    --btn-text-color: v-bind(customCss.btnTextColor);
-    --tips-text-color: v-bind(customCss.tipsTextColor);
-    --tips-bg-color: v-bind(customCss.tipsBgColor);
-    --btn-bg-color: v-bind(customCss.btnBgColor);
+    --border-color: v-bind(setting.borderColor);
+    --bg-color: v-bind(setting.bgColor);
+    --title-text-color: v-bind(setting.titleTextColor);
+    --btn-text-color: v-bind(setting.btnTextColor);
+    --tips-text-color: v-bind(setting.tipsTextColor);
+    --tips-bg-color: v-bind(setting.tipsBgColor);
+    --btn-bg-color: v-bind(setting.btnBgColor);
     position: relative;
     background-color: var(--bg-color);
 }
@@ -116,7 +116,7 @@ customCss.value = JSON.parse(props.cardStyle) as CardStyle
 .tips {
     position: absolute;
     display: none;
-    z-index: 10;
+    z-index: 999;
     background-color: var(--tips-bg-color);
     border: 1px solid var(--border-color);
     filter: drop-shadow(1px 1px 1px var(--border-color));

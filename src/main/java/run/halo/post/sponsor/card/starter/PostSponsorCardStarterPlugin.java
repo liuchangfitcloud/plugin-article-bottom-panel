@@ -1,4 +1,4 @@
-package run.halo.article.bottom.panel.starter;
+package run.halo.post.sponsor.card.starter;
 
 import org.pf4j.PluginWrapper;
 import org.springframework.stereotype.Component;
@@ -13,9 +13,9 @@ import run.halo.app.plugin.BasePlugin;
  * @since 1.0.0
  */
 @Component
-public class ArticleBottomPanelStarterPlugin extends BasePlugin {
+public class PostSponsorCardStarterPlugin extends BasePlugin {
 
-    public ArticleBottomPanelStarterPlugin(PluginWrapper wrapper) {
+    public PostSponsorCardStarterPlugin(PluginWrapper wrapper) {
         super(wrapper);
     }
 

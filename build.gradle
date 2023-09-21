@@ -5,7 +5,7 @@ plugins {
     id "run.halo.plugin.devtools" version "0.0.6"
 }
 
-group 'run.halo.article.bottom.panel.starter'
+group 'run.halo.post.sponsor.card.starter'
 sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
@@ -28,7 +28,7 @@ test {
 }
 
 node {
-    nodeProjectDir = file("${project.projectDir}/article-panel")
+    nodeProjectDir = file("${project.projectDir}/sponsor-card")
 }
 
 task buildFrontend(type: PnpmTask) {

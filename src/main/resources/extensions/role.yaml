@@ -1,0 +1,15 @@
+apiVersion: v1alpha1
+kind: Role
+metadata:
+  name: plugin-post-sponsor-anonymous-role-template
+  labels:
+    halo.run/hidden: "true"
+    halo.run/role-template: "true"
+    rbac.authorization.halo.run/aggregate-to-anonymous: "true"
+  annotations:
+    rbac.authorization.halo.run/module: "PostSponsorAnonymous"
+    rbac.authorization.halo.run/display-name: "Post Sponsor Anonymous AccessRole"
+rules:
+  - apiGroups: ["post.sponsor.halo.run"]
+    resources: ["anonymous"]
+    verbs: ["get","list"]
