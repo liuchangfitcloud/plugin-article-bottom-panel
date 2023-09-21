@@ -13,12 +13,13 @@ export default defineConfig({
     })
   ],
   build: {
+    minify: false,
     lib: {
       entry: './src/main.ce.ts',
       name: 'charlie-article-pane',
       fileName: 'charlie-article-pane'
     },
-      outDir:"../src/main/resources/static"
+    outDir:"../src/main/resources/static"
   },
   define: {
     'process.env': process.env
