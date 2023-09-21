@@ -23,7 +23,6 @@ import run.halo.app.theme.dialect.TemplateHeadProcessor;
  **/
 @Component
 @RequiredArgsConstructor
-@Slf4j
 public class ArticleHeadProcessor implements TemplateHeadProcessor {
 
     private final ReactiveExtensionClient client;
@@ -33,36 +32,36 @@ public class ArticleHeadProcessor implements TemplateHeadProcessor {
 
     @Override
     public Mono<Void> process(ITemplateContext context, IModel model,
-        IElementModelStructureHandler structureHandler) {
+            IElementModelStructureHandler structureHandler) {
         final IModelFactory modelFactory = context.getModelFactory();
         return Mono.just(context)
-            .filter(this::isPostTemplate)
-            .flatMap(ct -> {
-                return client.fetch(ConfigMap.class, SETTING_CONFIG_NAME).map(ConfigMap::getData)
-                    .filter(data -> data.containsKey("basic"))
-                    .map(data -> {
-                        String cd = data.get("basic");
-                        return JsonUtils.jsonToObject(cd, Map.class);
-                    })
-                    .filter(map -> map.containsKey("show_block") && (Boolean) map.get("show_block"))
-                    .map(map -> {
-                        log.info("满足注入条件");
-                        String script = """
-                            <script src="/plugins/PluginArticleBottomPanel/assets/static/charlie-article-pane.js"></script>""";
-                        model.add(modelFactory.createText(script));
-                        return script;
-                    }).then();
-            });
+                .filter(this::isPostTemplate)
+                .flatMap(ct -> {
+                    return client.fetch(ConfigMap.class, SETTING_CONFIG_NAME).map(ConfigMap::getData)
+                            .filter(data -> data.containsKey("basic"))
+                            .map(data -> {
+                                String cd = data.get("basic");
+                                return JsonUtils.jsonToObject(cd, Map.class);
+                            })
+                            .filter(map -> map.containsKey("show_block") && (Boolean) map.get("show_block"))
+                            .map(map -> {
+                                String script = """
+                                        <script src="/plugins/PluginArticleBottomPanel/assets/static/charlie-article-pane.js"></script>""";
+                                model.add(modelFactory.createText(script));
+                                return script;
+                            }).then();
+                });
     }
 
     private boolean isPostTemplate(ITemplateContext context) {
         return DefaultTemplateEnum.POST.getValue()
-            .equals(context.getVariable(TEMPLATE_ID));
+                .equals(context.getVariable(TEMPLATE_ID));
     }
 
     public enum DefaultTemplateEnum {
         POST("post"),
         SINGLE_PAGE("page");
+
         private final String value;
 
         DefaultTemplateEnum(String value) {
