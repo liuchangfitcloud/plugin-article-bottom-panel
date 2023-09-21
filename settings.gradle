@@ -3,5 +3,5 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
-rootProject.name = 'plugin-article-bottom-panel'
+rootProject.name = 'plugin-post-sponsor-card'
 
