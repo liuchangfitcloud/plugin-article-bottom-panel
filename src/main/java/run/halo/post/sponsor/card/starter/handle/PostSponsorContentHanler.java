@@ -2,6 +2,8 @@ package run.halo.post.sponsor.card.starter.handle;
 
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 import run.halo.app.extension.ConfigMap;
@@ -17,6 +19,7 @@ import run.halo.app.theme.ReactivePostContentHandler;
  * @date 2023/9/7 3:06 PM
  **/
 @Component
+@Order(Ordered.LOWEST_PRECEDENCE-1)
 @RequiredArgsConstructor
 public class PostSponsorContentHanler implements ReactivePostContentHandler {
 
