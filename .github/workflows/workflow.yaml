@@ -63,10 +63,10 @@ jobs:
           version=${version#v}
           sed -i "s/version=.*-SNAPSHOT$/version=$version/1" gradle.properties
           ./gradlew clean build -x test
-      - name: Archive plugin-article-bottom-panel jar
+      - name: Archive plugin-post-sponsor-card jar
         uses: actions/upload-artifact@v2
         with:
-          name: plugin-article-bottom-panel
+          name: plugin-post-sponsor-card
           path: |
             build/libs/*.jar
           retention-days: 1
@@ -76,10 +76,10 @@ jobs:
     needs: build
     if: github.event_name == 'release'
     steps:
-      - name: Download plugin-article-bottom-panel jar
+      - name: Download plugin-post-sponsor-card jar
         uses: actions/download-artifact@v2
         with:
-          name: plugin-article-bottom-panel
+          name: plugin-post-sponsor-card
           path: build/libs
       - name: Get Name of Artifact
         id: get_artifact
